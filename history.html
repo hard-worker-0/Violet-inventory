@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales History - Violet Chemistry</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">Violet Chemistry</div>
+            <div class="nav-links">
+                <a href="index.html">📊 Dashboard</a>
+                <a href="products.html">📦 Product List</a>
+                <a href="add.html">➕ Add Product</a>
+                <a href="sell.html" class="btn-sell" style="border-radius: 4px; padding: 5px 12px; text-decoration: none; margin-left: 5px; font-weight: 600; font-size: 0.9em;">💰 Sell</a>
+                <a href="history.html" style="color: var(--primary);">📜 History</a>
+                <a href="trash.html">🗑️ Trash</a>
+            </div>
+            <button class="btn btn-outline" onclick="location.reload(true)">🔄 Refresh</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h1>Sales & Transaction History</h1>
+            <a href="sell.html" class="btn btn-success">💰 Record New Sale</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="historySearch" class="search-input" placeholder="Search by Product, Customer, Company, or Date (YYYY-MM-DD)...">
+        </div>
+
+        <!-- History Table -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Total Price</th>
+                        <th>Customer / Company</th>
+                        <th>Contact Info</th>
+                    </tr>
+                </thead>
+                <tbody id="historyTableBody">
+                    <tr>
+                        <td colspan="7" style="text-align:center; padding: 30px; color: var(--text-muted);">
+                            Loading sales history...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/history.js"></script>
+</body>
+</html>

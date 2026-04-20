@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login - Violet Chemistry</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background: linear-gradient(-45deg, #0ea5e9, #6366f1, #0c4a6e, #38bdf8);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-card h2 { color: white; margin-bottom: 30px; font-size: 2em; letter-spacing: 1px; }
+
+        .input-group { position: relative; margin-bottom: 25px; }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus { border-color: white; background: rgba(255,255,255,0.1); }
+        .input-group input::placeholder { color: rgba(255,255,255,0.6); }
+
+        .login-btn {
+            background: white;
+            color: #6366f1;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .login-btn:hover { transform: scale(1.02); box-shadow: 0 5px 15px rgba(255,255,255,0.3); }
+        .login-btn:active { transform: scale(0.98); }
+
+        /* Floating Bubbles */
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: bubbleUp 10s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes bubbleUp {
+            from { transform: translateY(0) rotate(0); opacity: 0.5; }
+            to { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Bubbles -->
+    <div id="bubbles"></div>
+
+    <div class="login-card">
+        <h2>VIOLET LOGIN</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit" id="btnText" class="login-btn">Log In</button>
+        </form>
+    </div>
+
+    <script src="config.js"></script>
+    <script>
+        // Create Bubbles
+        const bubbleContainer = document.getElementById('bubbles');
+        for(let i=0; i<15; i++) {
+            const b = document.createElement('div');
+            b.className = 'bubble';
+            const size = Math.random() * 60 + 20 + 'px';
+            b.style.width = size;
+            b.style.height = size;
+            b.style.left = Math.random() * 100 + '%';
+            b.style.animationDelay = Math.random() * 8 + 's';
+            b.style.animationDuration = Math.random() * 5 + 10 + 's';
+            bubbleContainer.appendChild(b);
+        }
+
+        // Login Logic
+        document.getElementById('loginForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btnText');
+            btn.innerText = "Verifying...";
+            btn.disabled = true;
+
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            try {
+                const url = `${API_URL}?action=login&user=${encodeURIComponent(user)}&pass=${encodeURIComponent(pass)}`;
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.success) {
+                    localStorage.setItem('violet_session', JSON.stringify({
+                        token: data.token,
+                        expiry: data.expiry
+                    }));
+                    window.location.href = "index.html";
+                } else {
+                    alert("Invalid Username or Password!");
+                    btn.innerText = "Log In";
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                alert("Connection failed. Check API URL.");
+                btn.innerText = "Log In";
+                btn.disabled = false;
+            }
+        };
+    </script>
+</body>
+</html>

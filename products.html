@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List - Violet Chemistry</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">Violet Chemistry</div>
+            <div class="nav-links">
+                <a href="index.html">📊 Dashboard</a>
+                <a href="products.html" style="color: var(--primary);">📦 Product List</a>
+                <a href="add.html">➕ Add Product</a>
+                <a href="sell.html" class="btn-sell" style="border-radius: 4px; padding: 5px 12px; text-decoration: none; margin-left: 5px; font-weight: 600; font-size: 0.9em;">💰 Sell</a>
+                <a href="history.html">📜 History</a>
+                <a href="trash.html">🗑️ Trash</a>
+            </div>
+            <button class="btn btn-outline" onclick="logout()" style="border-color: var(--danger); color: var(--danger);">🔓 Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-header">
+            <h1>Full Inventory Management</h1>
+            <a href="add.html" class="btn btn-primary">➕ Add New Product</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="listSearch" class="search-input" placeholder="Search by Name, ID, or Keywords...">
+        </div>
+
+        <!-- Full Product Table -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Name</th>
+                        <th>Stock</th>
+                        <th>Price/Unit</th>
+                        <th>Keywords</th>
+                        <th>Total Value</th>
+                        <th style="text-align: right;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="productTableBody">
+                    <tr>
+                        <td colspan="7" style="text-align:center; padding: 30px; color: var(--text-muted);">
+                            Loading inventory data from database...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Engine Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/products.js"></script>
+</body>
+</html>

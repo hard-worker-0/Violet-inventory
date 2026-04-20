@@ -1,0 +1,13 @@
+# Ignore local configuration
+config.js
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore backup/temp files
+*.tmp
+*.bak
+
+# Ignore the Google Script source (keep it in the Google Cloud Console instead)
+"google app script code.gs"

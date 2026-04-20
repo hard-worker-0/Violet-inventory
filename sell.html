@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Product - Violet Chemistry</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">Violet Chemistry</div>
+            <div class="nav-links">
+                <a href="index.html">📊 Dashboard</a>
+                <a href="products.html">📦 Product List</a>
+                <a href="add.html">➕ Add Product</a>
+                <a href="history.html">📜 History</a>
+                <a href="trash.html">🗑️ Trash</a>
+            </div>
+            <a href="index.html" class="btn btn-refresh">Cancel</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="form-card">
+            <h2>💰 Record New Sale</h2>
+            <form id="sellForm">
+                <div class="form-group">
+                    <label for="productSelect">Select Product</label>
+                    <select id="productSelect" required>
+                        <option value="">-- Choose a product --</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="sellQuantity">Quantity to Sell</label>
+                        <input type="number" step="0.01" id="sellQuantity" required placeholder="0.00">
+                        <small id="stockWarning" style="color: var(--danger); font-size: 0.8em; display: none;">Not enough stock!</small>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="sellPrice">Selling Price (per unit)</label>
+                        <input type="number" step="0.01" id="sellPrice" required placeholder="0.00">
+                    </div>
+                </div>
+
+                <!-- Live Total Summary -->
+                <div class="summary-box" style="background: var(--bg-soft); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed var(--success);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; color: var(--text-muted);">Total Sale Value:</span>
+                        <span id="sellTotalDisplay" style="font-size: 1.4em; font-weight: 700; color: var(--success);">৳0.00</span>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
+                <h3 style="margin-bottom: 15px; font-size: 1.1em; color: var(--primary);">Customer Details</h3>
+
+                <div class="form-group">
+                    <label for="customerName">Full Name / Person Name</label>
+                    <input type="text" id="customerName" required placeholder="Who is buying?">
+                </div>
+
+                <div class="form-group">
+                    <label for="companyName">Company Name (Optional)</label>
+                    <input type="text" id="companyName" placeholder="Enter company name if any">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="customerPhone">Phone Number</label>
+                        <input type="tel" id="customerPhone" placeholder="017xxxxxxxx">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="customerAddress">House Address / Location</label>
+                        <input type="text" id="customerAddress" placeholder="Street, City, etc.">
+                    </div>
+                </div>
+
+                <button type="submit" id="sellSubmitBtn" class="btn btn-success" style="width:100%; padding: 15px; font-size: 1.2em; margin-top: 10px;">
+                    🤝 Confirm Sale & Generate Receipt
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/sell.js"></script>
+</body>
+</html>

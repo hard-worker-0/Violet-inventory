@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Violet Chemistry</title>
+    <!-- This links to the beautiful CSS we just made -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">Violet Chemistry</div>
+            <div class="nav-links">
+                <a href="index.html" style="color: var(--primary);">📊 Dashboard</a>
+                <a href="products.html">📦 Product List</a>
+                <a href="add.html">➕ Add Product</a>
+                <a href="sell.html" class="btn-sell" style="border-radius: 4px; padding: 5px 12px; text-decoration: none; margin-left: 5px; font-weight: 600; font-size: 0.9em;">💰 Sell</a>
+                <a href="history.html">📜 History</a>
+                <a href="trash.html">🗑️ Trash</a>
+            </div>
+            <button class="btn btn-outline" onclick="logout()" style="border-color: var(--danger); color: var(--danger);">🔓 Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-header">
+            <h1>Inventory Dashboard</h1>
+            <div style="display: flex; gap: 10px;">
+                <a href="sell.html" class="btn btn-sell">💰 Record New Sale</a>
+                <a href="add.html" class="btn btn-primary">➕ Add New Product</a>
+            </div>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+            <div class="stat-card">
+                <h3>Total Products</h3>
+                <div class="value" id="stat-count">0</div>
+            </div>
+            <div class="stat-card" style="border-top-color: var(--primary);">
+                <h3>Total Inventory Value</h3>
+                <div class="value" id="stat-val">৳0</div>
+            </div>
+            <div class="stat-card" style="border-top-color: var(--success); cursor: pointer;" onclick="window.location.href='history.html'">
+                <h3>Last Sale Detail</h3>
+                <div id="last-sale-info" style="margin-top: 10px; text-align: left; font-size: 0.9em;">
+                    <div style="color: var(--text-muted); text-align: center; padding: 10px;">Loading last sale...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search inventory by Name, ID, or Keywords...">
+        </div>
+
+        <!-- Live Inventory Preview -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Name</th>
+                        <th>Stock</th>
+                        <th>Price/Unit</th>
+                        <th>Total Value</th>
+                        <th style="text-align: right;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryBody">
+                    <tr>
+                        <td colspan="6" style="text-align:center; padding: 30px; color: var(--text-muted);">
+                            Loading inventory data from database...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Engine Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>s"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
